@@ -1,0 +1,43 @@
+import sqlite3
+
+# Sample donor data
+donor_data = [
+    (1, "Ankit Bind", "O+", 32, "8454924709"),
+    (2, "Harshit Jaiswal", "O+", 27, "8591701732"),
+    (3, "Manan Jain", "A+", 37, "9702710539"),
+    (4, "Raj Halwai", "AB+", 15, "7021417482"),
+    (5, "Saksham Sharma", "A+", 28, "7400411653"),
+    (6, "Bhumika Dube", "O+", 22, "7400202883"),
+    (7, "Dakshata Kamble", "B-", 39, "8585959613"),
+    (8, "Janhavi Kandu", "AB-", 28, "9876543280"),
+    (9, "Nisha Gupta", "A+", 45, "9876543290"),
+    (10, "Sandhya Tiwari", "O+", 30, "9876543300")
+	
+]
+
+# Function to initialize the database and insert sample data
+def initialize_and_populate_database():
+    # Connect to SQLite database (it will be created if it doesn't exist)
+    conn = sqlite3.connect('blood_bank.db')
+    cursor = conn.cursor()
+
+    # Create the table if it doesn't exist
+    cursor.execute('''CREATE TABLE IF NOT EXISTS donors (
+                    donor_id INTEGER PRIMARY KEY,
+                    name TEXT,
+                    blood_group TEXT,
+                    age INTEGER,
+                    contact_no TEXT)''')
+
+    # Insert sample donor data
+    cursor.executemany("INSERT OR IGNORE INTO donors (donor_id, name, blood_group, age, contact_no) VALUES (?, ?, ?, ?, ?)", donor_data)
+
+    # Commit and close the connection
+    conn.commit()
+    conn.close()
+
+    print("Database initialized and sample data populated successfully.")
+
+# Run the function to populate the database
+if __name__ == "__main__":
+    initialize_and_populate_database()
