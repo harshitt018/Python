@@ -58,7 +58,7 @@ root.geometry("500x400")
 
 # Load background image
 try:
-    bg_image = Image.open("C:/Users/HARSHIT JAISWAL/OneDrive/Desktop/Ankit/background.jpg")
+    bg_image = Image.open("C:/Users/HARSHIT JAISWAL/OneDrive/Desktop/Movie Recommandation Sysytem/background.jpg")
     bg_image = bg_image.resize((500, 400), Image.LANCZOS)
     bg_photo = ImageTk.PhotoImage(bg_image)
 except FileNotFoundError:
